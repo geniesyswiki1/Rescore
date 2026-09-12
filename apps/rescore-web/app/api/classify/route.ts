@@ -58,12 +58,12 @@ export async function POST(request: Request) {
   // Read through a computed key so the bundler cannot inline a build-time value: on
   // Netlify the build environment and the function environment are not the same.
   //
-  // RESCORE_ANTHROPIC_API_KEY is preferred because some hosts inject an
-  // ANTHROPIC_API_KEY of their own for their AI features, which shadows the one the
-  // site is configured with and fails with a 401.
+  // The name is deliberately not ANTHROPIC_API_KEY: some hosts, Netlify among them,
+  // inject one of their own for their AI features. There is no fallback to it, because
+  // a reader that quietly spends a key nobody configured is worse than one that says it
+  // is not set up.
   const env = process.env as Record<string, string | undefined>;
-  const apiKey =
-    env[["RESCORE", "ANTHROPIC", "API", "KEY"].join("_")] ?? env[["ANTHROPIC", "API", "KEY"].join("_")];
+  const apiKey = env[["RESCORE", "ANTHROPIC", "API", "KEY"].join("_")];
   if (!apiKey) {
     return NextResponse.json(
       { error: "The report reader is not configured on this deployment. Set RESCORE_ANTHROPIC_API_KEY." },

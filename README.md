@@ -131,6 +131,20 @@ case API is built.
 
 Both platform bundles are verified: iOS 1,130 modules, Android 1,265.
 
+### Testers
+
+`ojotaiwo@aol.com` is to be added as an internal tester once there is a build:
+App Store Connect, TestFlight, Internal Testing, the Team (Expo) group.
+
+Internal testers must first exist as Users in App Store Connect with a role
+that can see builds, so the invite is two steps: add the Apple ID under Users
+and Access, then add them to the Internal Testing group. Internal testing takes
+up to 100 testers and needs no Beta App Review, so the invite reaches them as
+soon as the build finishes processing.
+
+Nothing can be invited yet. There is no Apple Developer account connected, no
+App Store Connect app record and no build, so the group does not exist.
+
 ### What is left before a store build
 
 These need accounts and credentials that are not in the repo:
