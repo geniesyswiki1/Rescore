@@ -80,8 +80,11 @@ export async function POST(request: Request) {
     });
 
     if (!response.ok) {
+      // The status is worth returning: it is the difference between a key problem and a
+      // busy model, and it carries nothing sensitive.
+      console.error(`classify: upstream returned ${response.status}`);
       return NextResponse.json(
-        { error: "We could not read that report just now. Try again in a moment." },
+        { error: "We could not read that report just now. Try again in a moment.", upstream: response.status },
         { status: 502 },
       );
     }
@@ -108,7 +111,8 @@ export async function POST(request: Request) {
     return NextResponse.json(parsed, {
       headers: { "cache-control": "no-store" },
     });
-  } catch {
+  } catch (problem) {
+    console.error("classify: request failed", problem);
     return NextResponse.json({ error: "The report reader is unavailable. Try again shortly." }, { status: 502 });
   }
 }
