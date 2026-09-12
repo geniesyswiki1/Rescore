@@ -10,6 +10,7 @@
     "prebuild": "tsc -p ../../packages/rescore-content/tsconfig.json"
   },
   "dependencies": {
+    "@netlify/blobs": "^11.0.3",
     "@rescore/content": "*",
     "next": "^15.5.25",
     "react": "19.1.0",

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { classifyPrompt } from "@rescore/content/prompts";
 import { hardStopsIn } from "@rescore/content/items";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -19,6 +20,19 @@ interface ClassifyRequest {
  * the text goes to the model and the result goes back to the browser.
  */
 export async function POST(request: Request) {
+  // The reader is free and unauthenticated, and every call spends money, so it is
+  // counted before anything else happens.
+  const rate = await checkRateLimit(request);
+  if (!rate.allowed) {
+    return NextResponse.json(
+      { error: rate.reason },
+      {
+        status: 429,
+        headers: rate.retryAfter ? { "retry-after": String(rate.retryAfter) } : undefined,
+      },
+    );
+  }
+
   let body: ClassifyRequest;
   try {
     body = (await request.json()) as ClassifyRequest;
