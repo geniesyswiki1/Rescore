@@ -95,6 +95,18 @@ Outreach status survives a re-scan. In production this runs as a Netlify
 scheduled function; `workflows/rescore-fsa-watcher-n8n.json` is the manual
 override.
 
+## Payments
+
+Stripe Managed Payments, on web and server side, in this and every other app for
+this owner. Lemon Squeezy is not used. Stripe is the merchant of record, so it is
+the seller on the receipt and it assesses and remits VAT.
+
+Mobile is the exception and it is not a choice: Apple and Google require their own
+in-app purchase for digital goods, so the apps keep consumable IAP through
+RevenueCat. Stripe cannot replace that inside the app.
+
+See CLAUDE.md for the standing decision and the fee arithmetic.
+
 ## Rules the code holds to
 
 These are from the spec and are enforced by tests, not just by convention:

@@ -12,7 +12,7 @@ Rescore lives in the same monorepo. Paste this as SPEC-RESCORE.md and open Claud
 
 > Read SPEC.md (Reinstate), SPEC-APPROVABLE.md and SPEC-RESCORE.md end to end. The engine in /packages/engine already exists; do not modify its public interface. Build Rescore exactly as specified, in the build order in section 11, then the mobile order in section 12. Do not invent features. Rescore generates documents only from facts the business operator has confirmed; it never infers an allergen, a temperature, a cleaning frequency or a training record. Where the spec is silent, choose the simplest option that keeps that line. After each phase, run the checks listed and stop to report. Never commit secrets.
 
-Definition of done for today, web: a takeaway owner with a rating of 1 uploads the officer's inspection report and letter, sees every non-compliance sorted into the three scored areas with the points it costs them, pays GBP 149 through Lemon Squeezy, works through the action plan, confirms the facts for their food safety management system, uploads dated photos of each fix, receives the readiness check, the right-to-reply text, the completed re-visit request and the platform evidence pack at a case link that also arrives by email. Live on Netlify with the 70 landing pages in the sitemap and the FSA watcher posting new low ratings to Slack.
+Definition of done for today, web: a takeaway owner with a rating of 1 uploads the officer's inspection report and letter, sees every non-compliance sorted into the three scored areas with the points it costs them, pays GBP 149 through Stripe Managed Payments, works through the action plan, confirms the facts for their food safety management system, uploads dated photos of each fix, receives the readiness check, the right-to-reply text, the completed re-visit request and the platform evidence pack at a case link that also arrives by email. Live on Netlify with the 70 landing pages in the sitemap and the FSA watcher posting new low ratings to Slack.
 
 Definition of done for today, mobile: the same flow in the Expo app with camera capture of the report and of each fix, on TestFlight internal testing and Play internal testing, store listings submitted.
 
@@ -28,7 +28,7 @@ Definition of done for today, mobile: the same flow in the Expo app with camera 
 
 **What it is not:** not an inspection, not a guarantee of a higher rating, not a substitute for actually cleaning, repairing and training. Every page says that documents do not clean a kitchen. Food safety consultancy is not a regulated profession in the UK, so the risk is liability rather than regulation; the design handles it by generating only from confirmed facts.
 
-**Business model:** one-time payment per case (GBP 99 for a rating of 2, GBP 149 for 0 or 1, GBP 49 for a rating of 3 or 4 wanting a 5), through Lemon Squeezy on web and in-app purchase on mobile, with free re-runs until the re-visit. No subscription in v1.
+**Business model:** one-time payment per case (GBP 99 for a rating of 2, GBP 149 for 0 or 1, GBP 49 for a rating of 3 or 4 wanting a 5), through Stripe Managed Payments on web and in-app purchase on mobile, with free re-runs until the re-visit. No subscription in v1.
 
 ---
 
@@ -119,7 +119,7 @@ Confidence in management is the area the product can move most reliably, because
 ### 3.3 The flow
 
 1. **Read the report (free).** Upload the inspection report and the officer's letter of required works (PDF, photos or paste). /api/classify returns: the rating and the three area scores if present, every non-compliance item as a list with its area, the legal basis the officer cited where one appears (Regulation 852/2004 Annex II chapters, Food Safety and Hygiene (England) Regulations 2013), whether any item indicates a prohibition, closure or an unsafe food, and the rating the current points produce. This is the hero and the lead magnet.
-2. **Start a case (payment).** "Build my re-rating pack, GBP 149" opens Lemon Squeezy. Case created, magic link emailed, token stored locally.
+2. **Start a case (payment).** "Build my re-rating pack, GBP 149" opens Stripe Checkout. Case created, magic link emailed, token stored locally.
 3. **Intake.** Sections: the business (type, size, hours, staff count, languages spoken in the kitchen), the kitchen (layout, equipment list from a guided checklist, hot and cold holding equipment, hand-wash basins, pest control contract), the people (who is in charge of food safety, who has which training), the current paperwork (what exists: diary, cleaning schedule, temperature records, allergen information, supplier list), and the delivery platforms the business is on. Each question shows "why the officer asks" in --muted.
 4. **Action plan.** Every non-compliance from the report becomes an item: what to do, where, the evidence to capture (photo, receipt, record, certificate), the area it moves and the points at stake. Items are grouped by area and ordered by points. The operator marks each done, uploads its evidence, and dates it. Items the tool cannot resolve from documents (a structural repair, a pest infestation, a new hand-wash basin) say plainly that the work has to be done and the photo has to show it.
 5. **Food safety management system.** From the intake and the confirmed equipment list, the tool generates the documented system the officer expects, in the structure of the FSA's own Safer Food Better Business pack: safe methods for the hazards this kitchen actually has, an opening and closing checks sheet, a cleaning schedule per area and item with frequency the operator sets, temperature record sheets for each piece of hot and cold holding equipment named, a 4-weekly review sheet, a supplier list, a staff training record with what each named person has completed, a pest control log, and an allergen matrix populated only for dishes whose ingredients the operator has confirmed line by line (dishes not confirmed are left blank and flagged). Every sheet carries the business name and the date generated and is exported as a printable DOCX and PDF pack.
@@ -164,7 +164,7 @@ Copy: "Some of this needs to be fixed before any paperwork matters, and some of 
 
 ### 4.1 Stack
 
-Identical to the other two products: Next.js 15 on Netlify, Anthropic API (Sonnet for classify, extract and review; Opus for drafting the safe methods and letters), Supabase Postgres and private Storage in London, Lemon Squeezy and RevenueCat, Resend, Upstash, Plausible and PostHog, Sentry, n8n. New: the FSA API client and the council enrichment script.
+Identical to the other two products: Next.js 15 on Netlify, Anthropic API (Sonnet for classify, extract and review; Opus for drafting the safe methods and letters), Supabase Postgres and private Storage in London, Stripe Managed Payments and RevenueCat, Resend, Upstash, Plausible and PostHog, Sentry, n8n. New: the FSA API client and the council enrichment script.
 
 ### 4.2 Repo structure
 
@@ -198,7 +198,7 @@ Everything else is /packages/engine and /packages/shared as already built.
 
 ### 4.3 Environment variables
 
-As Reinstate section 4.3 with a separate Netlify site and values. New Lemon Squeezy variants: LEMONSQUEEZY_VARIANT_R2, _R01, _R34. New: SLACK_LEADS_WEBHOOK (for the watcher), STANNP_API_KEY (postal outreach, section 8.3), EHC_REFERRAL_URL (the consultant referral in 3.7).
+As Reinstate section 4.3 with a separate Netlify site and values. New Stripe prices: STRIPE_PRICE_R2, _R01, _R34, _PREMISES, alongside STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET and NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY. New: SLACK_LEADS_WEBHOOK (for the watcher), STANNP_API_KEY (postal outreach, section 8.3), EHC_REFERRAL_URL (the consultant referral in 3.7).
 
 ### 4.4 Data model
 
@@ -296,7 +296,7 @@ As Reinstate, with 12-month retention and the FSA attribution. HowTo schema on t
 
 Rules as the other products: one-time, no subscription, local currency off (UK only), mobile tiers at GBP 148.99 / 98.99 / 48.99. Refund in full if no pack in 24 hours or the report was misread before the plan was built. No coupons except ALPHA (100% off, 40 uses) and POST (20% off, printed only on the outreach letter so its conversion can be measured).
 
-Unit economics: model cost GBP 0.60 to GBP 1.50, Lemon Squeezy 5% plus 50p, postal outreach about GBP 1 per letter. The GBP 149 pack nets roughly GBP 140. Break-even on the build (content package on the shared engine) is about 15 packs.
+Unit economics: model cost GBP 0.60 to GBP 1.50, Stripe Managed Payments 3.5% plus standard Stripe processing of 1.5% plus 20p on a standard UK card, postal outreach about GBP 1 per letter. The GBP 149 pack costs about GBP 7.65 to take and nets roughly GBP 141. Break-even on the build (content package on the shared engine) is about 15 packs.
 
 Phase 2 decision, not v1: a monthly digital diary (daily checks on the phone, records the officer can be shown) at GBP 9 to GBP 15 a month. The pack creates the demand for it; whether to add a subscription at all is a decision for the 90-day review.
 
@@ -369,7 +369,7 @@ Events: report_uploaded, classified (rating, scores, item_count, hard_stop), che
 
 - Domain live; trade mark check on "Rescore" done; handles reserved
 - Professional indemnity quote obtained; consultant referral partner named in env
-- .env populated; Lemon Squeezy live with 4 products and a verified webhook
+- .env populated; Stripe live with 4 prices, Managed Payments enabled and a verified webhook
 - Free report read works in incognito, rate-limited
 - Full rating-1 case run end to end with a fixture report (tick-box style) and a fixture letter (narrative style); items classified correctly; hard stop fires on a prohibition fixture
 - FSMS pack generates with [CONFIRM] markers on unconfirmed facts; allergen matrix blank where dishes are unconfirmed
@@ -397,7 +397,7 @@ Events: report_uploaded, classified (rating, scores, item_count, hard_stop), che
 
 **Phase 5: watcher and outreach plumbing (1 hour).** Scheduled FSA poller, leads table, Slack post, postal API integration with the letter template and QR code, POST code tracking. Check: a manual run inserts leads for one council and prints one test letter.
 
-**Phase 6: deploy (1 hour).** Third Netlify site via the connector, env, domain, purge, analytics, n8n, Lemon Squeezy live, checklist.
+**Phase 6: deploy (1 hour).** Third Netlify site via the connector, env, domain, purge, analytics, n8n, Stripe live, checklist.
 
 Roughly 12 hours.
 
@@ -427,7 +427,7 @@ As Reinstate section 13, with the third set of resources: Netlify site rescore, 
 Everything in the Reinstate operator runbook applies. What is new or different:
 
 1. **Trade mark check** for "Rescore" on the UK IPO register before buying the domain.
-2. **Lemon Squeezy:** a third store Rescore with four products: rating 0 or 1 GBP 149, rating 2 GBP 99, rating 3 or 4 GBP 49, second premises GBP 79. Local currency display off.
+2. **Stripe:** enable Managed Payments on the Rescore account and create four prices: rating 0 or 1 GBP 149, rating 2 GBP 99, rating 3 or 4 GBP 49, second premises GBP 79. GBP only, no local currency conversion. Stripe is the merchant of record and assesses the VAT.
 3. **Professional indemnity:** ask Alluvium's broker for cover extending to software that generates food safety documentation. Send them section 3.8. Needed before public launch, not before alpha.
 4. **Consultant referral partner:** one environmental health consultancy (a registered EHO practitioner or a small firm) that takes the hard-stop cases; a booking link and a written referral agreement. Trade associations for environmental health practitioners list members by area.
 5. **Postal print service:** an account with a UK print-and-post API (Stannp is the common choice); top up GBP 200 for the first run. Approve the letter artwork Claude Code and Figma produce before the first batch goes.
