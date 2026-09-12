@@ -1,0 +1,28 @@
+# Netlify build for the Rescore web app.
+#
+# The repo is an npm workspaces monorepo. The base is the web package so the Next.js
+# runtime finds next.config.mjs where it expects it; npm installs from the workspace
+# root, and the prebuild step compiles @rescore/content first because the app imports
+# its built output.
+
+[build]
+  base = "apps/rescore-web"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--no-audit --no-fund"
+
+# The free report reader is unauthenticated, so it is never cached.
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    cache-control = "no-store"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
