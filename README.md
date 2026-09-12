@@ -12,6 +12,7 @@ covers what is built and how to run it.
 
 ```
 apps/rescore-web          Next.js 15 site: the report reader and the 70 landing pages
+apps/rescore-mobile       Expo app: the same flow with camera capture in the kitchen
 packages/rescore-content  Scoring, items, FSMS templates, councils, platforms, prompts
 packages/rescore-fsa      FSA API client, the low-rating watcher, the scoring validator
 workflows                 The n8n watcher workflow, kept as the manual override
@@ -110,6 +111,62 @@ These are from the spec and are enforced by tests, not just by convention:
   sourced. Uber Eats and Just Eat are not, so those pages say so.
 - Hyphens only. No em dashes or en dashes anywhere, including generated
   documents and commit messages.
+
+## The mobile app
+
+```bash
+npm run start --workspace @rescore/mobile     # Expo dev server
+npm run export --workspace @rescore/mobile    # bundles both platforms
+```
+
+Expo SDK 57 with expo-router. Screens per spec 12: start (read my report), the
+score panel, the paywall, intake, the plan as a checklist with the camera on
+every item, the confirm prompts, the readiness check and cases. It shares
+`@rescore/content` with the web app, so the scoring model, the item taxonomy and
+the `[CONFIRM]` discipline are the same code on both.
+
+Evidence photos are stamped with the time they were taken, so a photo carries a
+date without the operator adding one. Cases are held in AsyncStorage until the
+case API is built.
+
+Both platform bundles are verified: iOS 1,130 modules, Android 1,265.
+
+### What is left before a store build
+
+These need accounts and credentials that are not in the repo:
+
+1. An Expo account and `eas init`, which fills `extra.eas.projectId` in
+   `app.json`.
+2. An Apple Developer account. Fill `appleId`, `ascAppId` and `appleTeamId` in
+   `eas.json`, then `eas build --platform ios --profile production` and
+   `eas submit --platform ios`.
+3. A Google Play developer account and a service account key at
+   `apps/rescore-mobile/play-service-account.json`, which is gitignored, then
+   `eas build --platform android --profile production` and `eas submit
+   --platform android` to the internal track.
+4. RevenueCat. The paywall records the purchase locally today so the flow can be
+   walked end to end; the `TODO` in `app/paywall.tsx` is where the real purchase
+   of `pack_r01`, `pack_r2` or `pack_r34` goes. It never claims a payment was
+   taken.
+5. App icons and a splash screen. `assets/` is empty, so the build uses Expo
+   defaults.
+
+## Hosting
+
+The web app is on Netlify at https://rescore-nodd.netlify.app, publicly
+readable. `netlify.toml` sets the base to the web package so the Next.js runtime
+finds the app inside the workspaces monorepo.
+
+Two things to know when deploying:
+
+- Deploy from a clean checkout. Uploading a working directory that contains
+  `node_modules` or `.next` fails the build.
+- `NEXT_PUBLIC_SITE_URL` is unset on the deploy, so the sitemap and robots point
+  at https://rescore.app. That is right once the domain is connected and wrong
+  until then; set the variable in Netlify if you want the interim URL in the
+  sitemap.
+- `ANTHROPIC_API_KEY` is not set, so the free report reader returns a message
+  rather than reading anything. That is the one variable the live site needs.
 
 ## Attribution
 

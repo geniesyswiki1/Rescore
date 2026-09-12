@@ -8,3 +8,9 @@ out/
 .DS_Store
 .netlify/
 coverage/
+
+# Expo
+apps/rescore-mobile/dist/
+apps/rescore-mobile/.expo/
+apps/rescore-mobile/expo-env.d.ts
+apps/rescore-mobile/play-service-account.json
