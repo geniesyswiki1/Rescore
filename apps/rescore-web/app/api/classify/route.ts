@@ -55,14 +55,18 @@ export async function POST(request: Request) {
     );
   }
 
-  // Read through a computed key so the bundler cannot inline a build-time value.
-  // On Netlify the build environment and the function environment are not the same,
-  // and an inlined key is whichever one happened to be present at build.
+  // Read through a computed key so the bundler cannot inline a build-time value: on
+  // Netlify the build environment and the function environment are not the same.
+  //
+  // RESCORE_ANTHROPIC_API_KEY is preferred because some hosts inject an
+  // ANTHROPIC_API_KEY of their own for their AI features, which shadows the one the
+  // site is configured with and fails with a 401.
   const env = process.env as Record<string, string | undefined>;
-  const apiKey = env[["ANTHROPIC", "API", "KEY"].join("_")];
+  const apiKey =
+    env[["RESCORE", "ANTHROPIC", "API", "KEY"].join("_")] ?? env[["ANTHROPIC", "API", "KEY"].join("_")];
   if (!apiKey) {
     return NextResponse.json(
-      { error: "The report reader is not configured on this deployment. Set ANTHROPIC_API_KEY." },
+      { error: "The report reader is not configured on this deployment. Set RESCORE_ANTHROPIC_API_KEY." },
       { status: 503 },
     );
   }
@@ -92,8 +96,11 @@ export async function POST(request: Request) {
         {
           error: "We could not read that report just now. Try again in a moment.",
           upstream: response.status,
-          // A fingerprint, never the key, so the operator can tell which key is in use.
-          keyFingerprint: createHash("sha256").update(apiKey).digest("hex").slice(0, 8),
+          // On a 401 only, a short fingerprint of the key in use, never the key itself,
+          // so the operator can tell whether the function has the key they configured.
+          ...(response.status === 401
+            ? { keyFingerprint: createHash("sha256").update(apiKey).digest("hex").slice(0, 8) }
+            : {}),
         },
         { status: 502 },
       );
