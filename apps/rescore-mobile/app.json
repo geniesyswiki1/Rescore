@@ -16,7 +16,8 @@
       "supportsTablet": false,
       "infoPlist": {
         "NSCameraUsageDescription": "Rescore uses the camera to photograph your inspection report and each fix you make, so the evidence carries a date.",
-        "NSPhotoLibraryUsageDescription": "Rescore attaches photos you already have as evidence against an item on your action plan."
+        "NSPhotoLibraryUsageDescription": "Rescore attaches photos you already have as evidence against an item on your action plan.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
