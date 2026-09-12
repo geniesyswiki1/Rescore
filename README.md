@@ -165,6 +165,31 @@ by supplying `EXPO_APPLE_TEAM_TYPE=INDIVIDUAL` (otherwise the first prompt block
 and answering two yes/no confirms: reuse the distribution certificate, and generate
 a new provisioning profile.
 
+### Submitting
+
+A signed IPA builds cleanly (`eas build --platform ios --profile production`,
+about 5 minutes). Submission is blocked on one manual step that cannot be
+automated:
+
+**The App Store Connect app record has to be created by hand.** Apple's API
+refuses it outright: `The resource 'apps' does not allow 'CREATE'. Allowed
+operations are: GET_COLLECTION, GET_INSTANCE, UPDATE`. EAS can create it, but
+only through an Apple ID password and 2FA session, which an API key cannot
+provide.
+
+Create it once at App Store Connect, My Apps, plus, New App:
+
+- Platform: iOS
+- Name: Rescore: Food Hygiene Rating
+- Primary language: English (UK)
+- Bundle ID: app.rescore.ios
+- SKU: anything, for example RESCORE-IOS-001
+
+After that everything else is automatable: the numeric Apple ID for the app can
+be read back with `GET /v1/apps?filter[bundleId]=app.rescore.ios`, put in
+`eas.json` as `ascAppId`, and `eas submit` runs non-interactively with the API
+key from then on.
+
 ### What is left before a store build
 
 These need accounts and credentials that are not in the repo:
