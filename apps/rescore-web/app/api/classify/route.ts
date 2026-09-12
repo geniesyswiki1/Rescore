@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { classifyPrompt } from "@rescore/content/prompts";
 import { hardStopsIn } from "@rescore/content/items";
@@ -54,7 +55,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  // Read through a computed key so the bundler cannot inline a build-time value.
+  // On Netlify the build environment and the function environment are not the same,
+  // and an inlined key is whichever one happened to be present at build.
+  const env = process.env as Record<string, string | undefined>;
+  const apiKey = env[["ANTHROPIC", "API", "KEY"].join("_")];
   if (!apiKey) {
     return NextResponse.json(
       { error: "The report reader is not configured on this deployment. Set ANTHROPIC_API_KEY." },
@@ -84,7 +89,12 @@ export async function POST(request: Request) {
       // busy model, and it carries nothing sensitive.
       console.error(`classify: upstream returned ${response.status}`);
       return NextResponse.json(
-        { error: "We could not read that report just now. Try again in a moment.", upstream: response.status },
+        {
+          error: "We could not read that report just now. Try again in a moment.",
+          upstream: response.status,
+          // A fingerprint, never the key, so the operator can tell which key is in use.
+          keyFingerprint: createHash("sha256").update(apiKey).digest("hex").slice(0, 8),
+        },
         { status: 502 },
       );
     }
