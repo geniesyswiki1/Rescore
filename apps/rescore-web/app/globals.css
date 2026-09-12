@@ -1,0 +1,340 @@
+/* The six tokens from spec 2.4. No others. */
+:root {
+  --tile: #f4f6f5;
+  --ink: #171a19;
+  --rule: #cfd6d2;
+  --muted: #66706b;
+  --done: #0f7b4b;
+  --open: #c25a16;
+
+  --max: 1080px;
+  --radius: 6px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--tile);
+  color: var(--ink);
+  font-family: var(--font-public-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.archivo {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-top: 2rem;
+}
+
+@media (min-width: 720px) {
+  h1 {
+    font-size: 44px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--done);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+small,
+.small {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.shell {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.site-header,
+.site-footer {
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-footer {
+  border-bottom: 0;
+  border-top: 1px solid var(--rule);
+  margin-top: 4rem;
+  padding: 2rem 0 3rem;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.site-header .shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 15px;
+  flex-wrap: wrap;
+}
+
+main {
+  padding: 2rem 0 1rem;
+}
+
+/* The logo: the word, then the three scored areas as bars. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.logo-bars {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logo-bar {
+  width: 14px;
+  height: 3px;
+  border: 1px solid var(--rule);
+  background: transparent;
+}
+
+.logo-bar.filled {
+  background: var(--done);
+  border-color: var(--done);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo-animate .logo-bar {
+    animation: fill-bar 300ms ease-out forwards;
+  }
+  .logo-animate .logo-bar:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .logo-animate .logo-bar:nth-child(2) {
+    animation-delay: 300ms;
+  }
+  .logo-animate .logo-bar:nth-child(3) {
+    animation-delay: 600ms;
+  }
+}
+
+@keyframes fill-bar {
+  to {
+    background: var(--done);
+    border-color: var(--done);
+  }
+}
+
+/* Two columns on desktop: the plan on the left, the score panel on the right. */
+.layout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+  }
+  .score-panel {
+    position: sticky;
+    top: 1.5rem;
+  }
+}
+
+.panel {
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  padding: 1.25rem;
+  background: transparent;
+}
+
+.score-row + .score-row {
+  margin-top: 1.25rem;
+}
+
+.score-label {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bar {
+  height: 10px;
+  border: 1px solid var(--rule);
+  margin-top: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--open);
+}
+
+.bar-fill.good {
+  background: var(--done);
+}
+
+.bar-target {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--ink);
+}
+
+button,
+.button {
+  font: inherit;
+  font-size: 15px;
+  border: 1px solid var(--done);
+  border-radius: var(--radius);
+  background: var(--done);
+  color: #fff;
+  padding: 0.7rem 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button.secondary,
+.button.secondary {
+  background: transparent;
+  color: var(--done);
+}
+
+button[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  font-size: 15px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.7rem;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+}
+
+textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.columns {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.steps {
+  padding-left: 1.2rem;
+}
+
+.steps li {
+  margin-bottom: 0.5rem;
+}
+
+.item-open {
+  color: var(--open);
+}
+
+.item-done {
+  color: var(--done);
+}
+
+.faq dt {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 700;
+  margin-top: 1.25rem;
+}
+
+.faq dd {
+  margin: 0.25rem 0 0;
+}
+
+.attribution {
+  font-size: 14px;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+  margin-top: 2rem;
+}
+
+.council-list {
+  columns: 2;
+  column-gap: 2rem;
+  font-size: 15px;
+  padding-left: 1.1rem;
+}
+
+@media (min-width: 900px) {
+  .council-list {
+    columns: 3;
+  }
+}
