@@ -1,0 +1,193 @@
+{
+  "note": "Safe methods and record sheets as structured slots, in the Safer Food Better Business structure the officer expects. Every slot is a fact the operator has to confirm. Nothing is filled in from a default: an unconfirmed slot renders as a [CONFIRM] marker, which is what the readiness check looks for.",
+  "packTitle": "Food safety management system",
+  "footer": "Rescore helps you prepare your own food safety records and re-rating request. It is not an inspection, it is not a guarantee of a rating, and the records are only true if your kitchen matches them.",
+  "safeMethods": [
+    {
+      "id": "sm-cross-contamination",
+      "group": "Cross-contamination",
+      "title": "Keeping raw and ready-to-eat food apart",
+      "appliesWhen": "always",
+      "slots": [
+        { "key": "raw_storage_unit", "prompt": "Which unit holds raw meat, fish or poultry, and which shelf?", "example": "Fridge 1 under the prep table, bottom shelf" },
+        { "key": "ready_storage_unit", "prompt": "Which unit holds ready-to-eat food?", "example": "Fridge 2 by the back door" },
+        { "key": "raw_boards", "prompt": "Which boards and knives are used for raw food, and how are they told apart?", "example": "Red boards, kept on the left hook" },
+        { "key": "prep_separation", "prompt": "If raw and ready-to-eat food are prepared on the same surface, what happens in between?", "example": "Surface washed, sanitised and left the contact time before ready-to-eat prep" }
+      ],
+      "body": "Raw meat, fish and poultry are kept in {{raw_storage_unit}}. Ready-to-eat food is kept in {{ready_storage_unit}}. Raw food is prepared using {{raw_boards}}. Where the same surface is used for both, {{prep_separation}}.",
+      "check": "Before each service, look at each fridge and confirm nothing raw is above anything ready to eat.",
+      "ifItGoesWrong": "Throw away any ready-to-eat food that raw food has touched or dripped onto. Clean and sanitise the surface before using it again."
+    },
+    {
+      "id": "sm-cooking",
+      "group": "Cooking",
+      "title": "Cooking food through",
+      "appliesWhen": "cooks",
+      "slots": [
+        { "key": "cooked_dishes", "prompt": "Which dishes do you cook from raw?", "example": "Chicken curry, lamb kebab, fried fish" },
+        { "key": "cooking_check", "prompt": "How do you check each one is cooked through?", "example": "Probe the thickest part to 75 degrees C" },
+        { "key": "probe_location", "prompt": "Where is the probe thermometer kept, and where are the probe wipes?", "example": "In the drawer by the pass, wipes in the same drawer" }
+      ],
+      "body": "We cook {{cooked_dishes}} from raw. Each is checked by {{cooking_check}}. The probe is kept {{probe_location}} and is wiped before and after every use.",
+      "check": "Probe the thickest part of the first portion of each dish at the start of service and write the reading on the cooking record.",
+      "ifItGoesWrong": "Keep cooking and check again. Do not serve until the check passes."
+    },
+    {
+      "id": "sm-chilling",
+      "group": "Chilling",
+      "title": "Chilled storage",
+      "appliesWhen": "always",
+      "slots": [
+        { "key": "cold_units", "prompt": "List every fridge, freezer and chilled display, with where each one stands.", "example": "Fridge 1 under the prep table, Fridge 2 by the back door, Freezer 1 in the yard store" },
+        { "key": "cold_target", "prompt": "What temperature does each chilled unit run at?", "example": "Fridge 1 at 4 degrees C, Fridge 2 at 3 degrees C" },
+        { "key": "cold_check_times", "prompt": "When are the chilled units checked each day?", "example": "Opening and close" }
+      ],
+      "body": "Our chilled and frozen units are {{cold_units}}. They run at {{cold_target}}. They are checked at {{cold_check_times}} and the readings are written on the temperature record for that unit.",
+      "check": "Read each unit's own display or probe a stored item, and write the reading down.",
+      "ifItGoesWrong": "Move the food to a working unit. Write down what you moved and when. If food has been above 8 degrees C for more than four hours, throw it away."
+    },
+    {
+      "id": "sm-cooling",
+      "group": "Chilling",
+      "title": "Cooling cooked food",
+      "appliesWhen": "cools",
+      "slots": [
+        { "key": "cooled_dishes", "prompt": "Which cooked dishes do you cool and keep?", "example": "Rice, curry base, cooked chicken" },
+        { "key": "cooling_method", "prompt": "How do you cool them, and how fast?", "example": "Portioned into shallow trays, uncovered on the cold bench, into the fridge within 90 minutes" }
+      ],
+      "body": "We cool {{cooled_dishes}}. The method is {{cooling_method}}. Cooling is recorded on the cooling record with the time it started and the time it went in the fridge.",
+      "check": "Check the food is cold to the centre before it goes in the fridge, and write the times down.",
+      "ifItGoesWrong": "If cooling took longer than the method allows, throw the food away. Do not put it back on the line."
+    },
+    {
+      "id": "sm-reheating",
+      "group": "Cooking",
+      "title": "Reheating",
+      "appliesWhen": "reheats",
+      "slots": [
+        { "key": "reheated_dishes", "prompt": "Which dishes do you reheat?", "example": "Curry base, cooked rice" },
+        { "key": "reheat_check", "prompt": "How do you check a reheated dish is hot enough?", "example": "Probe to 75 degrees C in the centre" }
+      ],
+      "body": "We reheat {{reheated_dishes}}. Each is checked by {{reheat_check}} and the reading goes on the reheating record. Food is reheated once only.",
+      "check": "Probe the centre of the first portion and write the reading down.",
+      "ifItGoesWrong": "Keep heating and check again. If it will not reach the temperature, throw it away."
+    },
+    {
+      "id": "sm-hot-holding",
+      "group": "Cooking",
+      "title": "Hot holding",
+      "appliesWhen": "hot_holds",
+      "slots": [
+        { "key": "hot_units", "prompt": "List every hot hold unit and where it stands.", "example": "Bain marie on the counter, heated display by the till" },
+        { "key": "hot_check_times", "prompt": "When is hot holding checked?", "example": "At the start of service and every two hours after" }
+      ],
+      "body": "Hot food is held in {{hot_units}} at 63 degrees C or above. Checks are made {{hot_check_times}} and written on the hot holding record.",
+      "check": "Probe the food in each unit and write the reading down.",
+      "ifItGoesWrong": "If food has been below 63 degrees C for less than two hours, reheat it to 75 degrees C once or serve it within the two hours. Longer than that, throw it away."
+    },
+    {
+      "id": "sm-defrosting",
+      "group": "Chilling",
+      "title": "Defrosting",
+      "appliesWhen": "freezes",
+      "slots": [
+        { "key": "defrost_items", "prompt": "What do you defrost?", "example": "Chicken thighs, fish fillets" },
+        { "key": "defrost_place", "prompt": "Where do you defrost it, and how long does it take?", "example": "Covered tray on the bottom shelf of Fridge 1, overnight" }
+      ],
+      "body": "We defrost {{defrost_items}}. Defrosting happens {{defrost_place}}, covered, below any ready-to-eat food, and the item is used within 24 hours of defrosting.",
+      "check": "Feel the centre of the item. If there is still ice in the middle, it is not ready to cook.",
+      "ifItGoesWrong": "Never refreeze food that has defrosted. Cook it or throw it away."
+    },
+    {
+      "id": "sm-cleaning",
+      "group": "Cleaning",
+      "title": "Cleaning as you go and the deep clean",
+      "appliesWhen": "always",
+      "slots": [
+        { "key": "sanitiser", "prompt": "Which sanitiser do you use, and what is its contact time?", "example": "The green spray, two minutes contact time" },
+        { "key": "clean_as_you_go", "prompt": "What gets cleaned between tasks?", "example": "Boards, knives, the prep bench and the handles" },
+        { "key": "deep_clean_owner", "prompt": "Who does the deep clean and on which day?", "example": "The owner, every Sunday after close" }
+      ],
+      "body": "We use {{sanitiser}}. Between tasks we clean {{clean_as_you_go}}. The deep clean is done by {{deep_clean_owner}} and every item on the cleaning schedule has a frequency and a name against it.",
+      "check": "At close, walk the kitchen against the cleaning schedule and sign it off.",
+      "ifItGoesWrong": "If something on the schedule was missed, do it before the next service and note it on the sheet."
+    },
+    {
+      "id": "sm-pests",
+      "group": "Management",
+      "title": "Pest control",
+      "appliesWhen": "always",
+      "slots": [
+        { "key": "pest_contractor", "prompt": "Who is your pest control contractor, and how often do they visit?", "example": "Named contractor, every 8 weeks" },
+        { "key": "pest_proofing", "prompt": "What proofing is in place at doors, windows and pipework?", "example": "Brush strip on the back door, mesh on the yard window" }
+      ],
+      "body": "Pest control is by {{pest_contractor}}. Proofing in place: {{pest_proofing}}. Every visit report is kept in the pest control log.",
+      "check": "Look for droppings, gnawing and flies at opening, and record anything you find.",
+      "ifItGoesWrong": "Call the contractor the same day, record the call, and throw away any food that pests have reached."
+    },
+    {
+      "id": "sm-allergens",
+      "group": "Management",
+      "title": "Allergens",
+      "appliesWhen": "always",
+      "slots": [
+        { "key": "allergen_owner", "prompt": "Who answers allergen questions from customers?", "example": "The owner, and the named supervisor on late shifts" },
+        { "key": "allergen_matrix_source", "prompt": "Which dishes have you confirmed the full ingredients for?", "example": "Confirmed dish by dish on the allergen matrix" },
+        { "key": "allergen_separation", "prompt": "What do you do when a customer declares an allergy?", "example": "Clean board and knife, fresh oil where possible, the order is made first" }
+      ],
+      "body": "Allergen questions are answered by {{allergen_owner}}. The allergen matrix is built from ingredients confirmed dish by dish: {{allergen_matrix_source}}. When a customer declares an allergy, {{allergen_separation}}.",
+      "check": "Check the matrix covers every dish on the menu today. Any dish not confirmed is not sold to a customer with an allergy.",
+      "ifItGoesWrong": "If you are not certain what is in a dish, say so and do not sell it to that customer.",
+      "neverInfer": "Rescore never suggests an allergen and never marks a dish free of one. A blank cell prints: confirm with the person who prepares this dish."
+    },
+    {
+      "id": "sm-suppliers",
+      "group": "Management",
+      "title": "Suppliers and traceability",
+      "appliesWhen": "always",
+      "slots": [
+        { "key": "suppliers", "prompt": "Who do you buy from, and what from each?", "example": "Named cash and carry for dry goods, named butcher for meat" },
+        { "key": "delivery_check", "prompt": "What do you check when a delivery arrives?", "example": "Temperature of chilled items, date codes, packaging intact" }
+      ],
+      "body": "We buy from {{suppliers}}. On delivery we check {{delivery_check}} and keep the delivery note. Invoices and delivery notes are kept in date order for traceability.",
+      "check": "Probe one chilled item per delivery and write the reading on the delivery record.",
+      "ifItGoesWrong": "Reject the delivery, note why on the record, and tell the supplier."
+    },
+    {
+      "id": "sm-training",
+      "group": "Management",
+      "title": "Training and supervision",
+      "appliesWhen": "always",
+      "slots": [
+        { "key": "food_safety_lead", "prompt": "Who is in charge of food safety here?", "example": "The owner" },
+        { "key": "staff_training", "prompt": "Who has which food safety training, and when did they do it?", "example": "Named staff with Level 2, with dates" },
+        { "key": "induction", "prompt": "What does a new member of staff get on their first day?", "example": "The safe methods walk-through and the fitness to work form" }
+      ],
+      "body": "Food safety here is the responsibility of {{food_safety_lead}}. Training held: {{staff_training}}. New staff receive {{induction}} and this is recorded on the training record before they handle food.",
+      "check": "Before a new starter handles food, check the training record has their induction on it.",
+      "ifItGoesWrong": "Do not let anyone handle food until the induction is done and recorded."
+    }
+  ],
+  "recordSheets": [
+    { "id": "rs-opening-closing", "title": "Opening and closing checks", "frequency": "Every day", "columns": ["Date", "Opening checks done by", "Fridges and freezers reading", "Hot holding reading", "Cleaning done", "Closing checks done by", "Anything wrong and what was done"] },
+    { "id": "rs-temperature", "title": "Temperature record", "frequency": "Every day, per named unit", "perUnit": true, "columns": ["Date", "Unit", "Morning reading", "Evening reading", "Signed", "Action if out of range"] },
+    { "id": "rs-cooking", "title": "Cooking and reheating record", "frequency": "Per service", "columns": ["Date", "Dish", "Reading", "Time", "Signed"] },
+    { "id": "rs-cooling", "title": "Cooling record", "frequency": "Each time food is cooled", "columns": ["Date", "Dish", "Time cooling started", "Time in the fridge", "Signed"] },
+    { "id": "rs-cleaning-schedule", "title": "Cleaning schedule", "frequency": "Per area and item", "columns": ["Area or item", "How often", "Product used", "Who does it", "Signed and dated"] },
+    { "id": "rs-pest-log", "title": "Pest control log", "frequency": "Every visit and every sighting", "columns": ["Date", "What was seen or done", "Contractor", "Report kept", "Signed"] },
+    { "id": "rs-training", "title": "Staff training record", "frequency": "Per person", "columns": ["Name", "Training", "Date completed", "Certificate held", "Refresher due"] },
+    { "id": "rs-suppliers", "title": "Supplier list", "frequency": "Reviewed at each 4-weekly review", "columns": ["Supplier", "What we buy", "Contact", "Last delivery checked"] },
+    { "id": "rs-delivery", "title": "Delivery record", "frequency": "Every delivery", "columns": ["Date", "Supplier", "Chilled item probed", "Reading", "Accepted or rejected", "Signed"] },
+    { "id": "rs-review", "title": "4-weekly review", "frequency": "Every 4 weeks", "columns": ["Date", "Anything gone wrong", "What changed", "Any new dish or equipment", "Signed"] },
+    { "id": "rs-fitness-to-work", "title": "Fitness to work", "frequency": "On induction and after any illness", "columns": ["Name", "Date", "Declaration signed", "Return to work date"] },
+    { "id": "rs-allergen-matrix", "title": "Allergen matrix", "frequency": "Per dish, updated when a recipe changes", "perDish": true, "columns": ["Dish", "Cereals containing gluten", "Crustaceans", "Eggs", "Fish", "Peanuts", "Soybeans", "Milk", "Nuts", "Celery", "Mustard", "Sesame", "Sulphur dioxide and sulphites", "Lupin", "Molluscs"], "blankCellNote": "Confirm with the person who prepares this dish." }
+  ],
+  "conditions": {
+    "always": "Every kitchen.",
+    "cooks": "The kitchen cooks food from raw.",
+    "cools": "The kitchen cooks food and keeps it for later.",
+    "reheats": "The kitchen reheats cooked food.",
+    "hot_holds": "The kitchen holds food hot for service.",
+    "freezes": "The kitchen freezes or defrosts food."
+  }
+}

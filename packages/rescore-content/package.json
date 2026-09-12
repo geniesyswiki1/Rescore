@@ -1,0 +1,27 @@
+{
+  "name": "@rescore/content",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./scoring": "./dist/scoring/index.js",
+    "./items": "./dist/items/index.js",
+    "./fsms": "./dist/fsms/index.js",
+    "./councils": "./dist/councils/index.js",
+    "./platforms": "./dist/platforms/index.js",
+    "./prompts": "./dist/prompts/index.js",
+    "./landing": "./dist/landing.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsc -p tsconfig.json && node --test \"dist/**/*.test.js\"",
+    "seed": "tsc -p tsconfig.json && node dist/councils/seed.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2"
+  }
+}

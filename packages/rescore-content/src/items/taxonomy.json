@@ -1,0 +1,384 @@
+{
+  "note": "The non-compliance items an officer commonly records, with the area each one scores against, the evidence that proves it fixed, and the legal basis officers usually cite. Used to keep the classify and plan prompts consistent. It is a lookup, not a list of things to assume: an item only ever enters a case because it appeared in that operator's own report.",
+  "evidenceTypes": {
+    "photo": "A dated photo that shows the thing itself, not the area around it.",
+    "photo_series": "Before and after photos of the same spot, both dated.",
+    "receipt": "A dated receipt or invoice for the work, the part or the service.",
+    "record": "A completed record sheet with real entries and dates.",
+    "certificate": "A training or service certificate with the person's or company's name and a date.",
+    "contract": "A signed contract or service agreement with dates.",
+    "document": "A document from the food safety management pack.",
+    "none_possible": "Nothing can be photographed. The fix is shown by the records over time."
+  },
+  "items": [
+    {
+      "id": "hyg-handwash-practice",
+      "area": "hygiene",
+      "label": "Staff not washing hands at the right times",
+      "officerPhrases": ["hand washing", "handwashing not observed", "staff did not wash hands between tasks"],
+      "typicalFix": "Brief every member of staff on when to wash hands, put the hand washing notice at the basin, and record the briefing on the training record.",
+      "evidence": ["record", "photo"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter VIII",
+      "documentsCanProve": "partly"
+    },
+    {
+      "id": "hyg-crosscontam-raw-ready",
+      "area": "hygiene",
+      "label": "Raw and ready-to-eat food not separated",
+      "officerPhrases": ["cross-contamination", "raw meat stored above", "ready to eat food not protected"],
+      "typicalFix": "Move raw meat to the bottom shelf of each fridge, give ready-to-eat food its own covered containers, and set out the separation rule in the safe method for cross-contamination.",
+      "evidence": ["photo", "document"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter IX",
+      "documentsCanProve": "partly"
+    },
+    {
+      "id": "hyg-chilled-holding",
+      "area": "hygiene",
+      "label": "Chilled food not held cold enough",
+      "officerPhrases": ["temperature control", "fridge running at", "chilled food above 8"],
+      "typicalFix": "Repair or replace the unit, set it to run at 5 degrees C or below, and start the temperature record sheet for that named unit.",
+      "evidence": ["photo", "record", "receipt"],
+      "legalBasis": "Food Safety and Hygiene (England) Regulations 2013 Schedule 4",
+      "documentsCanProve": "partly"
+    },
+    {
+      "id": "hyg-hot-holding",
+      "area": "hygiene",
+      "label": "Hot food not held hot enough",
+      "officerPhrases": ["hot holding", "below 63", "bain marie temperature"],
+      "typicalFix": "Repair or replace the hot hold unit, check it with a probe before service, and record the reading on the hot holding sheet.",
+      "evidence": ["photo", "record", "receipt"],
+      "legalBasis": "Food Safety and Hygiene (England) Regulations 2013 Schedule 4",
+      "documentsCanProve": "partly"
+    },
+    {
+      "id": "hyg-cooling",
+      "area": "hygiene",
+      "label": "Cooked food cooled too slowly",
+      "officerPhrases": ["cooling", "left to cool at room temperature", "cooling times not controlled"],
+      "typicalFix": "Set a cooling method with a time limit, portion into shallow trays, and record the cooling checks.",
+      "evidence": ["record", "document"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "mostly"
+    },
+    {
+      "id": "hyg-reheating",
+      "area": "hygiene",
+      "label": "Reheating not checked",
+      "officerPhrases": ["reheating", "not reheated to 75", "no probe used"],
+      "typicalFix": "Probe reheated food to 75 degrees C, or 82 degrees C in Scotland, and record the reading.",
+      "evidence": ["record"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "mostly"
+    },
+    {
+      "id": "hyg-probe-missing",
+      "area": "hygiene",
+      "label": "No working probe thermometer, or no probe wipes",
+      "officerPhrases": ["probe thermometer", "no means of checking temperature"],
+      "typicalFix": "Buy a probe thermometer and probe wipes, calibrate the probe, and record the calibration.",
+      "evidence": ["photo", "receipt", "record"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "partly"
+    },
+    {
+      "id": "hyg-date-labelling",
+      "area": "hygiene",
+      "label": "Opened or prepared food not date labelled",
+      "officerPhrases": ["date marking", "no use by date", "open food undated"],
+      "typicalFix": "Label every opened and prepared item with the date it was opened or made and the date it must be used by, and set the shelf lives in the safe method for stock.",
+      "evidence": ["photo", "document"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter IX",
+      "documentsCanProve": "partly"
+    },
+    {
+      "id": "hyg-defrosting",
+      "area": "hygiene",
+      "label": "Food defrosted unsafely",
+      "officerPhrases": ["defrosting", "thawing at room temperature"],
+      "typicalFix": "Defrost in the fridge in a covered container on the bottom shelf, and set the method out in the safe method for defrosting.",
+      "evidence": ["photo", "document"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter IX",
+      "documentsCanProve": "mostly"
+    },
+    {
+      "id": "hyg-open-food-uncovered",
+      "area": "hygiene",
+      "label": "Open food left uncovered or unprotected",
+      "officerPhrases": ["food left uncovered", "not protected from contamination"],
+      "typicalFix": "Cover and lid every container of open food in storage, including the bins under the prep table.",
+      "evidence": ["photo"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter IX",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "hyg-allergen-information",
+      "area": "hygiene",
+      "label": "Allergen information not available or not accurate",
+      "officerPhrases": ["allergen", "no allergen information", "allergen matrix"],
+      "typicalFix": "Build the allergen matrix dish by dish from the ingredients you confirm, and put the ask-us notice where customers order.",
+      "evidence": ["document", "photo"],
+      "legalBasis": "Regulation (EU) 1169/2011 Article 44 and the Food Information Regulations 2014",
+      "documentsCanProve": "mostly"
+    },
+    {
+      "id": "hyg-personal-hygiene",
+      "area": "hygiene",
+      "label": "Staff clothing, jewellery or sickness rules not followed",
+      "officerPhrases": ["protective clothing", "staff wearing", "fitness to work"],
+      "typicalFix": "Provide clean over-clothing, set the jewellery rule, and get every member of staff to sign the fitness to work form.",
+      "evidence": ["photo", "record"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter VIII",
+      "documentsCanProve": "partly"
+    },
+    {
+      "id": "str-cleaning-general",
+      "area": "structure",
+      "label": "Premises or equipment not clean enough",
+      "officerPhrases": ["dirty", "build up of grease", "not clean", "cleaning required"],
+      "typicalFix": "Deep clean the named surfaces and equipment, then put them on the cleaning schedule with a frequency and a name against each one.",
+      "evidence": ["photo_series", "document"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "str-floor-damaged",
+      "area": "structure",
+      "label": "Floor damaged, worn or not cleanable",
+      "officerPhrases": ["floor covering", "damaged floor", "floor not impervious"],
+      "typicalFix": "Repair or replace the floor covering so it can be cleaned properly. This is building work, not paperwork.",
+      "evidence": ["photo_series", "receipt"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter II",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "str-wall-ceiling",
+      "area": "structure",
+      "label": "Walls or ceiling damaged, or not cleanable",
+      "officerPhrases": ["wall surfaces", "ceiling tiles", "flaking paint"],
+      "typicalFix": "Make good and seal the surface so it wipes clean.",
+      "evidence": ["photo_series", "receipt"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter II",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "str-handwash-basin",
+      "area": "structure",
+      "label": "No usable hand-wash basin, or one blocked or without hot water, soap or towels",
+      "officerPhrases": ["wash hand basin", "no hot water", "no soap", "basin used for", "hand wash facilities"],
+      "typicalFix": "Free up the basin, restore hot and cold water, and keep soap and paper towels at it at all times.",
+      "evidence": ["photo", "receipt"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "no",
+      "hardStopIf": "The report says there is no hand washing facility at all, or no water supply."
+    },
+    {
+      "id": "str-pest-evidence",
+      "area": "structure",
+      "label": "Evidence of pests",
+      "officerPhrases": ["mouse droppings", "pest activity", "infestation", "flies", "cockroach"],
+      "typicalFix": "Get a pest control contractor in, proof the entry points, clean down, and keep the pest control log with every visit report.",
+      "evidence": ["contract", "record", "photo_series"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "no",
+      "hardStopIf": "The report describes the infestation as active, widespread or severe."
+    },
+    {
+      "id": "str-pest-proofing",
+      "area": "structure",
+      "label": "Gaps, holes or doors that let pests in",
+      "officerPhrases": ["proofing", "gap under the door", "holes in the wall"],
+      "typicalFix": "Proof the named gaps and fit a brush strip to the back door.",
+      "evidence": ["photo_series", "receipt"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "str-ventilation",
+      "area": "structure",
+      "label": "Ventilation or extraction inadequate or greasy",
+      "officerPhrases": ["extraction", "ventilation", "canopy filters", "grease build up in the canopy"],
+      "typicalFix": "Have the canopy and ductwork cleaned by a contractor, keep the certificate, and put the filters on the cleaning schedule.",
+      "evidence": ["receipt", "photo_series", "document"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "str-lighting",
+      "area": "structure",
+      "label": "Lighting inadequate or unshielded",
+      "officerPhrases": ["lighting", "light diffuser missing", "insufficient lighting"],
+      "typicalFix": "Replace the failed tubes and fit diffusers over lights above open food.",
+      "evidence": ["photo", "receipt"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "str-equipment-condition",
+      "area": "structure",
+      "label": "Equipment or work surfaces damaged, rusty or not cleanable",
+      "officerPhrases": ["rusty", "damaged equipment", "chopping boards scored", "surfaces not in good repair"],
+      "typicalFix": "Replace the named items. Scored boards and rusted shelving cannot be cleaned properly.",
+      "evidence": ["photo_series", "receipt"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter V",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "str-waste",
+      "area": "structure",
+      "label": "Waste storage or refuse area unsatisfactory",
+      "officerPhrases": ["refuse", "waste storage", "bins overflowing", "no lid on the bin"],
+      "typicalFix": "Fit lids, arrange a collection frequency that keeps the yard clear, and put the yard on the cleaning schedule.",
+      "evidence": ["photo_series", "contract"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter VI",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "str-water-supply",
+      "area": "structure",
+      "label": "Water supply, drainage or hot water inadequate",
+      "officerPhrases": ["no hot water", "drainage", "water supply", "sink not connected"],
+      "typicalFix": "Get a plumber to restore the supply or drainage. Nothing else can be done until this works.",
+      "evidence": ["photo", "receipt"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter VII",
+      "documentsCanProve": "no",
+      "hardStopIf": "The report says there is no hot water, no drinking water supply or a failed drain."
+    },
+    {
+      "id": "str-sinks",
+      "area": "structure",
+      "label": "No separate sink for food or for equipment washing",
+      "officerPhrases": ["single sink", "no separate facilities for washing food", "two compartment sink"],
+      "typicalFix": "Install or designate a separate sink, or set out a written method for using the one sink safely and get it agreed.",
+      "evidence": ["photo", "receipt", "document"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter II",
+      "documentsCanProve": "partly"
+    },
+    {
+      "id": "str-staff-facilities",
+      "area": "structure",
+      "label": "Staff facilities, changing or toilet arrangements unsatisfactory",
+      "officerPhrases": ["toilet opens directly", "no changing facilities", "staff belongings stored"],
+      "typicalFix": "Give staff somewhere to put their coats and bags away from food, and fit a self-closing door where the toilet opens onto the kitchen.",
+      "evidence": ["photo", "receipt"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "no"
+    },
+    {
+      "id": "cim-no-fsms",
+      "area": "confidence",
+      "label": "No documented food safety management system",
+      "officerPhrases": ["safer food better business", "SFBB", "no documented procedures", "HACCP based procedures"],
+      "typicalFix": "Put a documented system in place covering the hazards in this kitchen, in the Safer Food Better Business structure, and start using it daily.",
+      "evidence": ["document"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "yes"
+    },
+    {
+      "id": "cim-fsms-not-used",
+      "area": "confidence",
+      "label": "A system exists but the records are not being filled in",
+      "officerPhrases": ["diary not completed", "no entries since", "records not up to date"],
+      "typicalFix": "Fill in the opening and closing checks every day from today, and keep the completed sheets in date order for the officer to see.",
+      "evidence": ["record"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "yes"
+    },
+    {
+      "id": "cim-fsms-generic",
+      "area": "confidence",
+      "label": "The system is a blank or generic pack that does not match this kitchen",
+      "officerPhrases": ["generic", "not specific to the business", "pack not completed"],
+      "typicalFix": "Rewrite the safe methods around this kitchen's own equipment and dishes, by name.",
+      "evidence": ["document"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "yes"
+    },
+    {
+      "id": "cim-no-temperature-records",
+      "area": "confidence",
+      "label": "No temperature records for fridges, freezers or hot holding",
+      "officerPhrases": ["temperature records", "no monitoring records", "fridge temperatures not recorded"],
+      "typicalFix": "Start a record sheet for each named unit and record it at the times you set out in the system.",
+      "evidence": ["record"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "yes"
+    },
+    {
+      "id": "cim-no-cleaning-schedule",
+      "area": "confidence",
+      "label": "No cleaning schedule, or one that nobody follows",
+      "officerPhrases": ["cleaning schedule", "no documented cleaning"],
+      "typicalFix": "Write the cleaning schedule area by area and item by item, with a frequency, the product used and who does it.",
+      "evidence": ["document", "record"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "yes"
+    },
+    {
+      "id": "cim-no-training",
+      "area": "confidence",
+      "label": "Staff not trained, instructed or supervised",
+      "officerPhrases": ["food hygiene training", "no training records", "staff could not explain"],
+      "typicalFix": "Get every food handler through Level 2 food safety, keep the certificates, and record the in-house briefings on the training record.",
+      "evidence": ["certificate", "record"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter XII",
+      "documentsCanProve": "mostly"
+    },
+    {
+      "id": "cim-no-supervisor",
+      "area": "confidence",
+      "label": "Nobody named as responsible for food safety",
+      "officerPhrases": ["no nominated person", "management arrangements"],
+      "typicalFix": "Name the person in charge of food safety in the system, and record what training they hold.",
+      "evidence": ["document", "certificate"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "yes"
+    },
+    {
+      "id": "cim-no-supplier-records",
+      "area": "confidence",
+      "label": "No supplier list or traceability records",
+      "officerPhrases": ["traceability", "supplier records", "no invoices kept"],
+      "typicalFix": "List your suppliers with what you buy from each, and keep delivery notes and invoices in date order.",
+      "evidence": ["document", "receipt"],
+      "legalBasis": "Regulation (EC) 178/2002 Article 18",
+      "documentsCanProve": "yes"
+    },
+    {
+      "id": "cim-no-pest-log",
+      "area": "confidence",
+      "label": "No pest control contract or log",
+      "officerPhrases": ["pest control contract", "no pest control records"],
+      "typicalFix": "Put a contract in place and keep every visit report in the pest control log.",
+      "evidence": ["contract", "record"],
+      "legalBasis": "Regulation (EC) 852/2004 Annex II Chapter I",
+      "documentsCanProve": "mostly"
+    },
+    {
+      "id": "cim-no-review",
+      "area": "confidence",
+      "label": "The system has never been reviewed",
+      "officerPhrases": ["review", "not been updated", "no evidence of review"],
+      "typicalFix": "Do the 4-weekly review, write down what changed, and sign it.",
+      "evidence": ["record"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "yes"
+    },
+    {
+      "id": "cim-poor-track-record",
+      "area": "confidence",
+      "label": "Same problems found at more than one visit",
+      "officerPhrases": ["previously identified", "repeat contravention", "raised at the last inspection"],
+      "typicalFix": "Fix the repeat item first, show the record that keeps it fixed, and say in the right to reply what has changed so it does not come back.",
+      "evidence": ["record", "photo_series"],
+      "legalBasis": "Regulation (EC) 852/2004 Article 5",
+      "documentsCanProve": "partly"
+    }
+  ],
+  "hardStopSignals": [
+    { "id": "hs-prohibition", "phrases": ["hygiene emergency prohibition notice", "emergency prohibition", "voluntary closure", "closed the premises"], "reason": "A prohibition or closure is on the report." },
+    { "id": "hs-unsafe-food", "phrases": ["unsafe food", "detained", "seized", "voluntary surrender", "unfit for human consumption"], "reason": "Food has been identified as unsafe, detained or seized." },
+    { "id": "hs-infestation", "phrases": ["widespread infestation", "active infestation", "severe infestation", "heavy activity"], "reason": "The report describes an active or widespread pest infestation." },
+    { "id": "hs-utilities", "phrases": ["no hot water", "no water supply", "drainage failure", "no hand washing facilities"], "reason": "Water supply, drainage or hand washing has failed." }
+  ]
+}

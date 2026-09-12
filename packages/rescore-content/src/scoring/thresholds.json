@@ -1,0 +1,102 @@
+{
+  "scheme": "FHRS",
+  "appliesTo": ["England", "Wales", "Northern Ireland"],
+  "source": {
+    "document": "Food Hygiene Rating Scheme Brand Standard",
+    "publisher": "Food Standards Agency",
+    "url": "https://assets.publishing.service.gov.uk/media/69cad1c12c5db1b1db67e9d5/Food_Hygiene_Rating_Scheme_Brand_Standard.pdf",
+    "ratingTable": "Table 3 - Mapping of numerical scores from the intervention-rating scheme in the Food Law Code of Practice to the six FHRS food hygiene ratings",
+    "workedExamples": "Table 4 - Examples of the highest score and corresponding rating",
+    "prescribedValues": "Appendix 1, data fields for intervention rating scores",
+    "verifiedOn": "2026-09-12"
+  },
+  "areas": [
+    {
+      "key": "hygiene",
+      "label": "Hygienic food handling",
+      "shortLabel": "Hygiene",
+      "permittedScores": [0, 5, 10, 15, 20, 25],
+      "worst": 25,
+      "covers": "Cooking, cooling, reheating, storage, cross-contamination, hand washing in practice.",
+      "movedBy": "work in the kitchen, with photos and records as proof"
+    },
+    {
+      "key": "structure",
+      "label": "Cleanliness and condition of facilities and building",
+      "shortLabel": "Structure",
+      "permittedScores": [0, 5, 10, 15, 20, 25],
+      "worst": 25,
+      "covers": "Structure, cleaning, pests, ventilation, lighting, hand-wash basins.",
+      "movedBy": "cleaning, repair and equipment, with dated photos as proof"
+    },
+    {
+      "key": "confidence",
+      "label": "Management of food safety",
+      "shortLabel": "Confidence in management",
+      "permittedScores": [0, 5, 10, 20, 30],
+      "worst": 30,
+      "covers": "A documented system, records that are actually filled in, staff who can explain it.",
+      "movedBy": "paperwork and training, which is where Rescore does the most"
+    }
+  ],
+  "ratingBands": [
+    { "rating": 5, "descriptor": "Very good", "totalMin": 0, "totalMax": 15, "maxIndividual": 5 },
+    { "rating": 4, "descriptor": "Good", "totalMin": 20, "totalMax": 20, "maxIndividual": 10 },
+    { "rating": 3, "descriptor": "Generally satisfactory", "totalMin": 25, "totalMax": 30, "maxIndividual": 10 },
+    { "rating": 2, "descriptor": "Improvement necessary", "totalMin": 35, "totalMax": 40, "maxIndividual": 15 },
+    { "rating": 1, "descriptor": "Major improvement necessary", "totalMin": 45, "totalMax": 50, "maxIndividual": 20 },
+    { "rating": 0, "descriptor": "Urgent improvement necessary", "totalMin": 55, "totalMax": 80, "maxIndividual": null }
+  ],
+  "scoreMeanings": {
+    "hygiene": {
+      "0": "Full compliance. Practices and procedures are as the law requires.",
+      "5": "High standard of compliance. Minor points only.",
+      "10": "Generally satisfactory. Some non-compliances that need putting right.",
+      "15": "Some major non-compliance with hygiene and safety procedures.",
+      "20": "General failure to apply the controls that keep food safe.",
+      "25": "Very poor practices. Serious contamination risk and no effective temperature control of high-risk food."
+    },
+    "structure": {
+      "0": "Full compliance with structural requirements.",
+      "5": "High standard. Minor points only.",
+      "10": "Generally satisfactory. Some repair or cleaning outstanding.",
+      "15": "Some major structural or cleaning non-compliance.",
+      "20": "General failure of structure, cleaning or pest control.",
+      "25": "Almost total non-compliance. Widespread pests, or not enough space to work safely."
+    },
+    "confidence": {
+      "0": "A documented system in place and used, staff trained, good track record.",
+      "5": "A documented system in place with minor gaps.",
+      "10": "Some gaps in the system, the records or the training.",
+      "20": "Little or no working system. Hazards not understood, records not kept.",
+      "30": "No food safety management or documented procedures at all, and no appreciation of the hazards."
+    }
+  },
+  "revisit": {
+    "feeIsSetByEachAuthority": true,
+    "basis": "Localism Act 2011 allows an authority in England to recover the cost of a re-visit requested by the business. Each authority decides whether to charge and sets its own fee.",
+    "noFee": {
+      "standstillMonths": 3,
+      "standstillNote": "Where no fee is charged, the re-visit should not take place until three months have passed since the inspection that gave the rating, unless the only actions were permanent structural improvements, repairs or upgrading of equipment, when the authority may visit sooner at its discretion.",
+      "visitWithinMonthsOfStandstillEnd": 3,
+      "maximumWaitMonths": 6,
+      "requestsPerPlannedIntervention": 1
+    },
+    "withFee": {
+      "standstillMonths": 0,
+      "visitWithinMonthsOfRequestOrPayment": 3,
+      "requestsPerPlannedIntervention": null
+    },
+    "eligibleRatings": [0, 1, 2, 3, 4]
+  },
+  "rightToReply": {
+    "publishedWordLimit": null,
+    "houseLimitWords": 200,
+    "houseLimitReason": "The Brand Standard sets no published word limit. Rescore keeps the reply short because the authority may edit it and consumers read it next to the rating.",
+    "purpose": "To explain what has been put right since the inspection, or the circumstances at the time. Not to complain about the scheme or the officer.",
+    "deadline": "None. A reply may be submitted at any time until the next rating is given.",
+    "publishedUntil": "A new food hygiene rating is given.",
+    "authorityMayEdit": true
+  },
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Ratings data from the Food Standards Agency."
+}

@@ -1,0 +1,49 @@
+{
+  "note": "What each delivery platform's own partner policy says about food hygiene ratings. Only a first-party source counts as verified. Where we could not read the platform's own policy page, the entry stays unverified and the page says so. Rescore never claims to know how a platform will decide.",
+  "platforms": [
+    {
+      "slug": "deliveroo",
+      "name": "Deliveroo",
+      "policyName": "Food Hygiene and Safety Policy",
+      "sourceUrl": "https://merchants.deliveroo.com/legal/policies",
+      "sourceType": "first_party",
+      "verified": true,
+      "checkedOn": "2026-09-12",
+      "minimumRating": 2,
+      "statedPosition": "An FSA hygiene rating of at least 2 is needed to list on Deliveroo, unless the business falls within an exception in the policy.",
+      "belowMinimum": "The policy sets out a route for a partner rated 1: engage an independent third-party food safety provider for a desktop consultation or an onsite audit at their own cost, or decline that and wait for the local authority re-inspection. A partner who does neither in time, or who does not reach at least a 2 at the next inspection, faces suspension until the rating improves.",
+      "partnerContact": "Your partner manager, or partner support in the Deliveroo partner hub.",
+      "whatToSend": "The evidence pack, the re-visit request receipt and the dated photos, so your partner manager can see the work is done and a re-visit is booked."
+    },
+    {
+      "slug": "uber-eats",
+      "name": "Uber Eats",
+      "policyName": null,
+      "sourceUrl": null,
+      "sourceType": "secondary",
+      "verified": false,
+      "checkedOn": "2026-09-12",
+      "minimumRating": null,
+      "statedPosition": "We could not read a minimum rating from Uber Eats' own partner policy pages on the date checked. Third-party guides commonly report a minimum of 3 in most areas, but that is not a source Rescore will state as fact.",
+      "belowMinimum": "Unknown from a first-party source. Ask your partner manager what applies to your listing.",
+      "partnerContact": "Your Uber Eats partner manager, or restaurant support in Uber Eats Manager.",
+      "whatToSend": "The evidence pack, the re-visit request receipt and the dated photos.",
+      "needsFirstPartyCheck": true
+    },
+    {
+      "slug": "just-eat",
+      "name": "Just Eat",
+      "policyName": null,
+      "sourceUrl": null,
+      "sourceType": "secondary",
+      "verified": false,
+      "checkedOn": "2026-09-12",
+      "minimumRating": null,
+      "statedPosition": "We could not read a minimum rating from Just Eat's own partner policy pages on the date checked. Third-party guides commonly report a minimum of 3, but that is not a source Rescore will state as fact.",
+      "belowMinimum": "Unknown from a first-party source. Ask your partner manager what applies to your listing.",
+      "partnerContact": "Your Just Eat account manager, or partner support in Just Eat Partner Centre.",
+      "whatToSend": "The evidence pack, the re-visit request receipt and the dated photos.",
+      "needsFirstPartyCheck": true
+    }
+  ]
+}

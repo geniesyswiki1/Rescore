@@ -1,0 +1,16 @@
+{
+  "note": "Re-visit facts filled in by hand, keyed on council slug. The FSA publishes no re-visit fees and only 10 of 331 authorities publish a scheme URL, so the enrichment script cannot find most of them. Anything in here must have been read on the council's own page, with the page URL in sourceUrl and the date in checkedOn. Never put a guessed fee in this file: a council with no entry falls back to 'check with [council]' and the Brand Standard's general rules, which is correct and safe. Refresh quarterly per spec 3.4.",
+  "example": {
+    "some-council-slug": {
+      "charges": true,
+      "feeGbp": 190,
+      "requestRoute": "form",
+      "requestUrl": "https://www.example.gov.uk/food-hygiene-rerating-request",
+      "statedWait": "Up to 3 months from payment.",
+      "rightToReplyUrl": "https://www.example.gov.uk/food-hygiene-right-to-reply",
+      "sourceUrl": "https://www.example.gov.uk/food-hygiene-rating-re-visit",
+      "checkedOn": "2026-09-12"
+    }
+  },
+  "councils": {}
+}
