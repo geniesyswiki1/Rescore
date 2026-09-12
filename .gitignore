@@ -14,3 +14,6 @@ apps/rescore-mobile/dist/
 apps/rescore-mobile/.expo/
 apps/rescore-mobile/expo-env.d.ts
 apps/rescore-mobile/play-service-account.json
+
+# App Store Connect API key. Never commit the private key.
+apps/rescore-mobile/credentials/

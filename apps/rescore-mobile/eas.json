@@ -21,7 +21,11 @@
   "submit": {
     "production": {
       "ios": {
-        "appleTeamId": "9Z6DNX67TV"
+        "appleTeamId": "9Z6DNX67TV",
+        "ascAppId": "6811413984",
+        "ascApiKeyPath": "./credentials/AuthKey_2782UMP9XL.p8",
+        "ascApiKeyId": "2782UMP9XL",
+        "ascApiKeyIssuerId": "a005fd01-4aff-48ae-ae4e-5e1f5a680677"
       },
       "android": {
         "serviceAccountKeyPath": "./play-service-account.json",
