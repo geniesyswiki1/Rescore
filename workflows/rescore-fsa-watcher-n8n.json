@@ -1,0 +1,84 @@
+{
+  "name": "Rescore - FSA low rating watcher",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [ { "field": "hours", "hoursInterval": 24 } ] }
+      },
+      "name": "Every 24h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [ 0, 0 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Local authority IDs to watch (from https://api.ratings.food.gov.uk/Authorities/basic).\n// Newham 112, Hackney 99, Southwark 115, Chelmsford 10, Birmingham 374. Add as many as you like.\nconst authorities = [112, 99, 115, 10, 374];\nconst ratings = ['0', '1', '2'];\nconst out = [];\nfor (const la of authorities) {\n  for (const r of ratings) {\n    out.push({ json: { url: `https://api.ratings.food.gov.uk/Establishments?localAuthorityId=${la}&ratingKey=${r}&schemeTypeKey=FHRS&pageSize=5000&pageNumber=1`, la, r } });\n  }\n}\nreturn out;"
+      },
+      "name": "Build queries",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ 220, 0 ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": { "response": { "response": { "responseFormat": "json" } } },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-version", "value": "2" },
+            { "name": "Accept", "value": "application/json" }
+          ]
+        }
+      },
+      "name": "FSA API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [ 440, 0 ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Flatten every establishment, then keep only ones we have not seen before at this RatingDate.\n// Seen-set lives in workflow static data, so no database is needed to start.\nconst staticData = $getWorkflowStaticData('global');\nstaticData.seen = staticData.seen || {};\nconst out = [];\nfor (const item of $input.all()) {\n  const list = (item.json.establishments || []);\n  for (const e of list) {\n    const key = `${e.FHRSID}:${(e.RatingDate || '').slice(0, 10)}`;\n    if (staticData.seen[key]) continue;\n    staticData.seen[key] = 1;\n    out.push({ json: {\n      fhrsid: e.FHRSID,\n      name: e.BusinessName,\n      type: e.BusinessType,\n      address: [e.AddressLine1, e.AddressLine2, e.AddressLine3, e.AddressLine4, e.PostCode].filter(Boolean).join(', '),\n      postcode: e.PostCode,\n      authority: e.LocalAuthorityName,\n      rating: e.RatingValue,\n      rating_date: (e.RatingDate || '').slice(0, 10),\n      hygiene: e.scores && e.scores.Hygiene,\n      structural: e.scores && e.scores.Structural,\n      confidence: e.scores && e.scores.ConfidenceInManagement,\n      pending: e.NewRatingPending,\n      right_to_reply: e.RightToReply || '',\n      fsa_url: `https://ratings.food.gov.uk/business/${e.FHRSID}`\n    } });\n  }\n}\n// Newest inspections first; on the very first run this will be the whole backlog, which is useful as the initial outreach list.\nout.sort((a, b) => (b.json.rating_date || '').localeCompare(a.json.rating_date || ''));\nreturn out;"
+      },
+      "name": "New since last run",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ 660, 0 ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "typeValidation": "strict" },
+          "conditions": [
+            { "id": "c1", "leftValue": "={{ $json.fhrsid }}", "rightValue": "", "operator": { "type": "number", "operation": "exists", "singleValue": true } }
+          ],
+          "combinator": "and"
+        }
+      },
+      "name": "Anything new?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [ 880, 0 ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": { "__rl": true, "mode": "name", "value": "#rescore-leads" },
+        "text": "={{ `*${$json.rating}* | ${$json.name} (${$json.type})\\n${$json.address}\\n${$json.authority} | inspected ${$json.rating_date} | H ${$json.hygiene} / S ${$json.structural} / CiM ${$json.confidence}${$json.pending ? ' | re-rating pending' : ''}\\n${$json.fsa_url}` }}",
+        "otherOptions": {}
+      },
+      "name": "Post to Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [ 1100, 0 ]
+    }
+  ],
+  "connections": {
+    "Every 24h": { "main": [ [ { "node": "Build queries", "type": "main", "index": 0 } ] ] },
+    "Build queries": { "main": [ [ { "node": "FSA API", "type": "main", "index": 0 } ] ] },
+    "FSA API": { "main": [ [ { "node": "New since last run", "type": "main", "index": 0 } ] ] },
+    "New since last run": { "main": [ [ { "node": "Anything new?", "type": "main", "index": 0 } ] ] },
+    "Anything new?": { "main": [ [ { "node": "Post to Slack", "type": "main", "index": 0 } ], [] ] }
+  },
+  "settings": { "executionOrder": "v1" }
+}
