@@ -145,6 +145,26 @@ soon as the build finishes processing.
 Nothing can be invited yet. There is no Apple Developer account connected, no
 App Store Connect app record and no build, so the group does not exist.
 
+### iOS credentials
+
+Set up on 12 September 2026 against team `9Z6DNX67TV` (Individual). Three things
+are worth recording because they are not obvious:
+
+- The bundle identifier `app.rescore.ios` is registered (Developer Portal ID
+  `UV5B82U7LQ`).
+- **A new distribution certificate cannot be created.** Apple caps iOS
+  Distribution certificates at two and the team already holds both. The build
+  reuses `464FB575H5`, the certificate the other apps on this team already
+  share, which is normal and non-destructive. Never revoke one to make room:
+  that breaks signing for Plainshot, Six Signals, Chief of Staff, Celestial Book
+  and Between Visits.
+- Provisioning profile `3H5KAXHL87` was generated for this bundle id.
+
+`eas credentials:configure-build` is interactive only. It can be driven headlessly
+by supplying `EXPO_APPLE_TEAM_TYPE=INDIVIDUAL` (otherwise the first prompt blocks)
+and answering two yes/no confirms: reuse the distribution certificate, and generate
+a new provisioning profile.
+
 ### What is left before a store build
 
 These need accounts and credentials that are not in the repo:
