@@ -10,6 +10,12 @@
   command = "npm run build"
   publish = ".next"
 
+# The Next.js runtime turns the .next output into Netlify functions and static
+# assets. Declared explicitly so it runs even when framework detection does not
+# fire for a package inside a workspaces monorepo.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [build.environment]
   NODE_VERSION = "22"
   NPM_FLAGS = "--no-audit --no-fund"
