@@ -22,7 +22,9 @@
     "android": {
       "package": "app.rescore.android",
       "permissions": [
-        "CAMERA"
+        "CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ],
       "adaptiveIcon": {
         "backgroundColor": "#F4F6F5"
@@ -44,8 +46,10 @@
     "extra": {
       "apiBaseUrl": "https://rescore-nodd.netlify.app",
       "eas": {
-        "projectId": ""
-      }
-    }
+        "projectId": "143050b3-b8f6-46a2-a93f-f746d8c14ecf"
+      },
+      "router": {}
+    },
+    "owner": "7amdev"
   }
 }
